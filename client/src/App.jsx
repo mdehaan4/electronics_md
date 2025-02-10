@@ -12,15 +12,15 @@ function App() {
       <h1>My E-commerce App</h1>
       <nav>
         <Link to="/">Home</Link> | 
-        <Link to="/products">Products</Link> | 
-        <Link to="/register">Register</Link> | 
-        <Link to="/login">Login</Link> {/* Add the Login link */}
+        <Link to="/Products">Products</Link> | 
+        <Link to="/Register">Register</Link> | 
+        <Link to="/Login">Login</Link> 
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} /> {/* Add the Login route */}
+        <Route path="/Products" element={<Products />} />
+        <Route path="/Register" element={<Register />} />
+        <Route path="/Login" element={<Login />} /> 
       </Routes>
     </div>
   );

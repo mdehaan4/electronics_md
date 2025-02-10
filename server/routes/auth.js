@@ -34,12 +34,12 @@ module.exports = (app, passport) => {
   // Google OAuth
   router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
   router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-    res.redirect('/'); // Redirect to home or dashboard after successful login
+    res.redirect('http://localhost:5173/'); // Redirect to home or dashboard after successful login
   });
 
   // Facebook OAuth
   router.get('/facebook', passport.authenticate('facebook'));
   router.get('/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), (req, res) => {
-    res.redirect('/'); // Redirect to home or dashboard after successful login
+    res.redirect('http://localhost:5173/'); // Redirect to home or dashboard after successful login
   });
 };

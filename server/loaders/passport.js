@@ -46,20 +46,21 @@ module.exports = (app) => {
     try {
       // Find or create user in your database
       const user = await AuthServiceInstance.findOrCreateGoogleUser(profile);
-      done(null, user);
+      return done(null, user);
     } catch (err) {
-      done(err);
+      return done(err);
     }
   }));
 
-  // Configure Facebook strategy
+
   passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: '/auth/facebook/callback'
+    callbackURL: '/auth/facebook/callback',
+    profileFields: ['id', 'emails', 'name'], // Request email and name fields
+    scope: ['email'] // Request email permission
   }, async (accessToken, refreshToken, profile, done) => {
     try {
-      // Find or create user in your database
       const user = await AuthServiceInstance.findOrCreateFacebookUser(profile);
       done(null, user);
     } catch (err) {
@@ -69,3 +70,7 @@ module.exports = (app) => {
 
   return passport;
 }
+
+
+
+

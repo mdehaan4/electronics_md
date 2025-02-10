@@ -10,4 +10,9 @@ module.exports = (app, passport) => {
   orderRouter(app);
   productRouter(app);
   userRouter(app);
-}
+
+  // Data Deletion Route
+  app.get('/data-deletion', (req, res) => {
+    res.send('Data Deletion Instructions');
+  });
+};

@@ -52,6 +52,14 @@ function Login() {
         </div>
         <button type="submit">Login</button>
       </form>
+      <div>
+        <button onClick={() => window.location.href = 'http://localhost:4000/auth/google'}>
+          Login with Google
+        </button>
+        <button onClick={() => window.location.href = 'http://localhost:4000/auth/facebook'}>
+          Login with Facebook
+        </button>
+      </div>
     </div>
   );
 }
