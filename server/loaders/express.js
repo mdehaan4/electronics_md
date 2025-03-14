@@ -1,11 +1,14 @@
-
+require('dotenv').config();
 const bodyParser = require('body-parser');
-const cors = require('cors');
 const session = require('express-session');
+const cors = require('cors');
 
 module.exports = (app) => {
-  // Enable Cross Origin Resource Sharing to all origins by default
-  app.use(cors());
+  // Enable Cross Origin Resource Sharing with credentials
+  app.use(cors({
+    origin: ['http://localhost:5173', 'https://d5f3-82-17-235-177.ngrok-free.app'],
+    credentials: true
+  }));
 
   // Transforms raw string of req.body into JSON
   app.use(bodyParser.json());
@@ -17,17 +20,17 @@ module.exports = (app) => {
   app.set('trust proxy', 1);
 
   // Creates a session
-  app.use(
-    session({  
-      secret: process.env.SESSION_SECRET,  // Now using the environment variable
-      resave: false,
-      saveUninitialized: false,
-      cookie: {
-        secure: false,  // Use true if you're in production with HTTPS
-        maxAge: 24 * 60 * 60 * 1000  // 1 day in milliseconds
-      }
-    })
-  );
-
+  app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: false, // 
+      maxAge: 24 * 60 * 60 * 1000, // 1 day in milliseconds
+      sameSite: 'lax', // 
+      httpOnly: true 
+    }
+  }));
+  
   return app;
 };

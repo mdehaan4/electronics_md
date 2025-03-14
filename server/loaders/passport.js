@@ -19,7 +19,6 @@ module.exports = (app) => {
   
   // Set method to deserialize data stored in cookie and attach to req.user
   passport.deserializeUser((id, done) => {
-    // Implement logic to find user by ID
     AuthServiceInstance.findUserById(id)
       .then(user => done(null, user))
       .catch(err => done(err));
@@ -41,36 +40,33 @@ module.exports = (app) => {
   passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: 'https://9224-82-17-235-177.ngrok-free.app/auth/google/callback'
+    callbackURL: 'https://d5f3-82-17-235-177.ngrok-free.app/auth/google/callback'
   }, async (accessToken, refreshToken, profile, done) => {
     try {
-      // Find or create user in your database
       const user = await AuthServiceInstance.findOrCreateGoogleUser(profile);
       return done(null, user);
     } catch (err) {
+      console.error('Error during Google OAuth:', err);  // Log error for debugging
       return done(err);
     }
   }));
 
-
+  // Configure Facebook strategy
   passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_CLIENT_ID,
     clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-    callbackURL: '/auth/facebook/callback',
-    profileFields: ['id', 'emails', 'name'], // Request email and name fields
-    scope: ['email'] // Request email permission
+    callbackURL: 'https://d5f3-82-17-235-177.ngrok-free.app/auth/facebook/callback',
+    profileFields: ['id', 'emails', 'name'],
+    scope: ['email']
   }, async (accessToken, refreshToken, profile, done) => {
     try {
       const user = await AuthServiceInstance.findOrCreateFacebookUser(profile);
-      done(null, user);
+      return done(null, user);
     } catch (err) {
-      done(err);
+      console.error('Error during Facebook OAuth:', err);  // Log error for debugging
+      return done(err);
     }
   }));
 
   return passport;
-}
-
-
-
-
+};

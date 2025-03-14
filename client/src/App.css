@@ -1,42 +1,58 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Global Body Styles */
+body {
+  font-family: "Liter", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  background-image: url('/images/md\ elec2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  margin: 0; /* Remove default margin */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Main Content Section */
+main {
+  width: 100%; /* Full width */
+  max-width: 1200px; /* Limit max width for better readability */
+  padding: 20px;
+  color: rgb(21, 45, 143);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 60px; /* Ensure content is below the navbar */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Navbar Styles */
+nav {
+  background-color: #071178;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  
 }
 
-.card {
-  padding: 2em;
+nav h1 {
+  color: white;
+  font-size: 1.5em;
+  margin-right: auto;
+  font-family: "Liter", sans-serif;
 }
 
-.read-the-docs {
-  color: #888;
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 16px;
+}
+
+nav a:hover {
+  color: #f0a500;
 }
