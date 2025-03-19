@@ -40,7 +40,7 @@ module.exports = (app) => {
   passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: 'https://d5f3-82-17-235-177.ngrok-free.app/auth/google/callback'
+    callbackURL: 'https://ed3f-82-17-235-177.ngrok-free.app/auth/google/callback'
   }, async (accessToken, refreshToken, profile, done) => {
     try {
       const user = await AuthServiceInstance.findOrCreateGoogleUser(profile);
@@ -55,7 +55,7 @@ module.exports = (app) => {
   passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_CLIENT_ID,
     clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-    callbackURL: 'https://d5f3-82-17-235-177.ngrok-free.app/auth/facebook/callback',
+    callbackURL: 'https://ed3f-82-17-235-177.ngrok-free.app/auth/facebook/callback',
     profileFields: ['id', 'emails', 'name'],
     scope: ['email']
   }, async (accessToken, refreshToken, profile, done) => {

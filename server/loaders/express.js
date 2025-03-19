@@ -2,35 +2,35 @@ require('dotenv').config();
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const cors = require('cors');
+const passport = require('passport');
 
 module.exports = (app) => {
-  // Enable Cross Origin Resource Sharing with credentials
+  // Enable Cross-Origin Resource Sharing (CORS)
   app.use(cors({
-    origin: ['http://localhost:5173', 'https://d5f3-82-17-235-177.ngrok-free.app'],
+    origin: ['http://localhost:5173', 'https://ed3f-82-17-235-177.ngrok-free.app'],
     credentials: true
   }));
 
-  // Transforms raw string of req.body into JSON
+  // Parse incoming request bodies
   app.use(bodyParser.json());
-
-  // Parses urlencoded bodies
   app.use(bodyParser.urlencoded({ extended: true }));
 
-  // Set to trust proxy (needed for session cookie when behind a proxy or load balancer)
+  // Trust proxy settings for cookies over Ngrok
   app.set('trust proxy', 1);
 
-  // Creates a session
+  // Session configuration (✅ Secure for Ngrok, not for local development)
   app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: false, // 
-      maxAge: 24 * 60 * 60 * 1000, // 1 day in milliseconds
-      sameSite: 'lax', // 
-      httpOnly: true 
+      secure: process.env.NODE_ENV === 'production' || process.env.USE_NGROK === 'true', // ✅ Secure for Ngrok
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
+      sameSite: 'None', // ✅ Required for cross-origin requests
+      httpOnly: true
     }
   }));
-  
+
+
   return app;
 };

@@ -1,0 +1,84 @@
+/* Centering the form */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    padding-bottom: 0px;
+  
+  }
+  
+  /* Styling the form */
+  form {
+    display: flex;
+    flex-direction: column; /* Stack form elements vertically */
+    width: 300px;
+    height: 300px; 
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+   
+  }
+  
+
+  /* Styling input fields */
+  input {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  /* Styling the login button */
+  .login-button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 0px;
+    background-color: #071178; /* Color for login button */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    
+  }
+  
+  .login-button:hover {
+    background-color: #05105b;
+  }
+  
+  /* Styling social login buttons */
+  .social-login {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+  }
+  
+  .social-button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    color: white;
+  }
+  
+  .google-btn {
+    background-color: #db4437; /* Color for Google button */
+
+  }
+  
+  .facebook-btn {
+    background-color: #3b5998; /* Color for Facebook button */
+  }
+  
+  .social-button:hover {
+    opacity: 0.8; /* Slight transparency on hover for all social buttons */
+  }
+  
+
+  h2 {
+    color : white;
+  }

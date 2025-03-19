@@ -35,21 +35,58 @@ module.exports = (app, passport) => {
     }
   });
 
+
+
+
+
+
   router.post('/login', passport.authenticate('local'), (req, res) => {
-    console.log(req.session); // Log the session object to see if it's being created
-    res.status(200).send(req.user); // Send authenticated user as response
+    console.log('🔹 Session after login:', req.session);
+  
+    req.session.save(() => { // ✅ Ensure session is saved
+      res.status(200).json({ user: req.user });
+    });
   });
+
 
   // Google OAuth
   router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
   router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
     console.log('✅ Google login success:', req.user);
-    res.redirect(`http://localhost:5173/`); // Redirect to home or dashboard after successful login
+    
+    req.session.save(() => { // ✅ Ensure session is saved before redirecting
+      res.redirect('http://localhost:5173/');
+    });
   });
+
 
   // Facebook OAuth
   router.get('/facebook', passport.authenticate('facebook'));
   router.get('/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), (req, res) => {
     res.redirect(`http://localhost:5173/`); // Redirect to home or dashboard after successful login
   });
+
+
+
+  router.get('/logout', (req, res) => {
+    req.logout((err) => {
+      if (err) {
+        return res.status(500).send('Logout failed');
+      }
+      res.clearCookie('connect.sid'); // Make sure to clear the session cookie
+      return res.redirect('http://localhost:5173/'); // Redirect to home page or login page
+    });
+  });
+
+
+
+
+
+
+
 };
+
+
+
+
+

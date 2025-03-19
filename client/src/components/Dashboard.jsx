@@ -6,15 +6,15 @@ const Dashboard = () => {
 
   // Check user session on mount
   useEffect(() => {
-    fetch('http://localhost:4000/auth/me', {
-      credentials: 'include', // ✅ IMPORTANT: Include cookies
+    fetch('https://ed3f-82-17-235-177.ngrok-free.app/auth/me', { // ✅ Correct endpoint for checking session
+      credentials: 'include', // ✅ Send cookies for session
     })
       .then((res) => {
         if (!res.ok) throw new Error('Not authenticated');
         return res.json();
       })
       .then((data) => {
-        setUser(data.user);
+        setUser(data.user); // ✅ Store the user data
         setLoading(false);
       })
       .catch((err) => {
@@ -22,6 +22,7 @@ const Dashboard = () => {
         setLoading(false);
       });
   }, []);
+  ;
 
   if (loading) return <p>Loading...</p>;
   if (!user) return <p>Unauthorized. Please <a href="/">Login</a>.</p>;
@@ -30,7 +31,7 @@ const Dashboard = () => {
     <div>
       <h1>Welcome, {user.email || user.name}!</h1>
       <p>This is your dashboard. You are logged in.</p>
-      <button onClick={() => window.location.href = 'http://localhost:4000/auth/logout'}>
+      <button onClick={() => window.location.href = 'http://localhost:5173'}>
         Logout
       </button>
     </div>
